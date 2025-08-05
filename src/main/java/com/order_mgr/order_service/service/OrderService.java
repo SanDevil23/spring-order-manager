@@ -9,10 +9,12 @@ import java.util.List;
 //import java.util.Optional;
 
 @Service
-public class OrderService {
+public class OrderService implements IOrderService {
+
     @Autowired
     private OrderRepository orderRepository;
 
+    @Override
     public void createOrder(Order order){
         orderRepository.save(order);
         return;
@@ -24,6 +26,7 @@ public class OrderService {
 //        return order;
 //    }
 
+    @Override
     public List<Order> fetchAllOrders(){
         return orderRepository.findAll();
     }
