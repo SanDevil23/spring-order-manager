@@ -1,5 +1,6 @@
 package com.order_mgr.order_service.model;
 
+import com.order_mgr.order_service.utils.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderID;
     private int userID;
-    private String status;
+    private OrderStatus status;
     private Date date;
 }
