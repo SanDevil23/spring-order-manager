@@ -14,6 +14,7 @@ public class OrderService implements IOrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    // create new orders
     @Override
     public void createOrder(Order order){
         orderRepository.save(order);
@@ -26,11 +27,13 @@ public class OrderService implements IOrderService {
         return orderRepository.findById(orderId).orElse(null);
     }
 
+    // fetch the list of all orders
     @Override
     public List<Order> fetchAllOrders(){
         return orderRepository.findAll();
     }
 
+    // update the order status
     @Override
     public void updateOrderStatus(int orderID, String status){
         OrderStatus orderStatus = OrderStatus.valueOf(status);
