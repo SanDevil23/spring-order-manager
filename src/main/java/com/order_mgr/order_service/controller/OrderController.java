@@ -4,7 +4,6 @@ import com.order_mgr.order_service.model.Order;
 import com.order_mgr.order_service.service.IOrderService;
 import com.order_mgr.order_service.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,4 +36,13 @@ public class OrderController {
         }
     }
 
+    @PatchMapping("/admin/update")
+    public ResponseEntity<ApiResponse> updateOrderStatus(@RequestParam int orderId, @RequestParam String status){
+        try {
+            orderInterface.updateOrderStatus(orderId, status);
+            return ResponseEntity.ok(new ApiResponse("Updated Order Status", null));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ApiResponse("Failed to Update Order Status", null));
+        }
+    }
 }
