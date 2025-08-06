@@ -2,11 +2,11 @@ package com.order_mgr.order_service.service;
 
 import com.order_mgr.order_service.model.Order;
 import com.order_mgr.order_service.repo.OrderRepository;
+import com.order_mgr.order_service.utils.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-//import java.util.Optional;
 
 @Service
 public class OrderService implements IOrderService {
@@ -20,14 +20,30 @@ public class OrderService implements IOrderService {
         return;
     }
 
-    // TODO: code logic yet to be written
-//    public Order fetchOrderById(int orderId){
-//        Optional<Order> order =  orderRepository.findById(orderId);
-//        return order;
-//    }
+    // fetch Orders by ID
+    @Override
+    public Order fetchOrderById(int orderId){
+        return orderRepository.findById(orderId).orElse(null);
+    }
 
     @Override
     public List<Order> fetchAllOrders(){
         return orderRepository.findAll();
     }
+
+    @Override
+    public void updateOrderStatus(int orderID, String status){
+        OrderStatus orderStatus = OrderStatus.valueOf(status);
+
+        // need to take care of the null pointer exception
+        Order order = fetchOrderById(orderID);
+
+        if (order == null){
+            // define a separate class for error (utils)
+            return;
+        }
+        order.setStatus(orderStatus);
+        return;
+    }
+
 }
