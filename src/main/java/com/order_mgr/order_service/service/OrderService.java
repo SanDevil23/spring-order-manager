@@ -35,7 +35,7 @@ public class OrderService implements IOrderService {
 
     // update the order status
     @Override
-    public void updateOrderStatus(int orderID, String status){
+    public Order updateOrderStatus(int orderID, String status){
         OrderStatus orderStatus = OrderStatus.valueOf(status);
 
         // need to take care of the null pointer exception
@@ -43,10 +43,10 @@ public class OrderService implements IOrderService {
 
         if (order == null){
             // define a separate class for error (utils)
-            return;
+            return null;
         }
         order.setStatus(orderStatus);
-        return;
+        return order;
     }
 
 }

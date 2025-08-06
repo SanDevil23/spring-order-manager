@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")   // CORS resolution
+@CrossOrigin("*")   // CORS resolution **not recommended for production
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("${api.prefix}/orders")
@@ -39,8 +39,14 @@ public class OrderController {
     @PatchMapping("/admin/update")
     public ResponseEntity<ApiResponse> updateOrderStatus(@RequestParam int orderId, @RequestParam String status){
         try {
-            orderInterface.updateOrderStatus(orderId, status);
-            return ResponseEntity.ok(new ApiResponse("Updated Order Status", null));
+            Order updatedOrder = orderInterface.updateOrderStatus(orderId, status);
+
+            // check if the status has been updated successfully
+            if (updatedOrder.getStatus().toString().equals(status)){
+                return ResponseEntity.ok(new ApiResponse("Updated Order Status", null));
+            }
+
+            throw new RuntimeException("Failed to update the order status");
         } catch (Exception e) {
             return ResponseEntity.ok(new ApiResponse("Failed to Update Order Status", null));
         }

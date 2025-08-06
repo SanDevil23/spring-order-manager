@@ -9,5 +9,5 @@ public interface IOrderService {
     void createOrder(Order order);
     Order fetchOrderById(int orderId);
     List<Order> fetchAllOrders();
-    void updateOrderStatus(int orderID, String status);
+    Order updateOrderStatus(int orderID, String status);
 }
