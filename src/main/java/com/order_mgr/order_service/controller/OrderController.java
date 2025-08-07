@@ -1,12 +1,11 @@
 package com.order_mgr.order_service.controller;
 
+import com.order_mgr.order_service.logic.IOrderService;
 import com.order_mgr.order_service.model.Order;
-import com.order_mgr.order_service.service.IOrderService;
 import com.order_mgr.order_service.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,4 +41,19 @@ public class OrderController {
         }
     }
 
+    @PatchMapping("/admin/update")
+    public ResponseEntity<ApiResponse> updateOrderStatus(@RequestParam int orderId, @RequestParam String status){
+        try {
+            Order updatedOrder = orderInterface.updateOrderStatus(orderId, status);
+
+            // check if the status has been updated successfully
+            if (updatedOrder.getStatus().toString().equals(status)){
+                return ResponseEntity.ok(new ApiResponse("Updated Order Status", null));
+            }
+
+            throw new RuntimeException("Failed to update the order status");
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ApiResponse("Failed to Update Order Status", null));
+        }
+    }
 }

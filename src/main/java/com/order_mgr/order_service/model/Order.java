@@ -2,10 +2,7 @@ package com.order_mgr.order_service.model;
 
 import com.order_mgr.order_service.utils.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
