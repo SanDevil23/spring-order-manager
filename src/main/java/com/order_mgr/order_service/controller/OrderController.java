@@ -16,17 +16,17 @@ import java.util.List;
 @RestController
 @RequestMapping("${api.prefix}/orders")
 public class OrderController {
-//    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
     private final IOrderService orderInterface;
 
     @PostMapping("/add")
     public ResponseEntity<ApiResponse> createOrder(@RequestBody Order order){
         try{
             orderInterface.createOrder(order);
-//            logger.info("Order placed successfully");
+            logger.info("Order placed successfully");
             return ResponseEntity.ok(new ApiResponse("Order Created Successfully", order));
         } catch (Exception e){
-//            logger.error("Error while creating new order");
+            logger.error("Error while creating new order");
             return ResponseEntity.status(500).body(new ApiResponse("Order creation failed", null));
         }
     }
@@ -37,6 +37,7 @@ public class OrderController {
             List<Order> orderList = orderInterface.fetchAllOrders();
             return ResponseEntity.ok(new ApiResponse("Order List", orderList));
         } catch (Exception e) {
+            logger.error("Failed to fetch orders");
             return ResponseEntity.status(500).body(new ApiResponse("Failed to fetch orders", null));
         }
     }
@@ -48,11 +49,13 @@ public class OrderController {
 
             // check if the status has been updated successfully
             if (updatedOrder.getStatus().toString().equals(status)){
+                logger.info("Order status updated for the order id: {}", orderId);
                 return ResponseEntity.ok(new ApiResponse("Updated Order Status", null));
             }
 
             throw new RuntimeException("Failed to update the order status");
         } catch (Exception e) {
+            logger.error("failed to update the status for the order id: {}", orderId);
             return ResponseEntity.ok(new ApiResponse("Failed to Update Order Status", null));
         }
     }
