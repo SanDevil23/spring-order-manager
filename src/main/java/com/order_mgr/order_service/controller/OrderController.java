@@ -1,7 +1,7 @@
 package com.order_mgr.order_service.controller;
 
 import com.order_mgr.order_service.model.Order;
-import com.order_mgr.order_service.service.IOrderService;
+import com.order_mgr.order_service.logic.IOrderService;
 import com.order_mgr.order_service.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,6 @@
-package com.order_mgr.order_service.service;
+package com.order_mgr.order_service.logic;
 
 import com.order_mgr.order_service.model.Order;
-import com.order_mgr.order_service.utils.OrderStatus;
 
 import java.util.List;
 
