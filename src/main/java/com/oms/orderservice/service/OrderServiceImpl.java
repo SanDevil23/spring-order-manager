@@ -35,7 +35,7 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto create(OrderDto orderRequest) {
-        OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getStatus().getId()).orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
+        OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getOrderStatus().getId()).orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
         OrderModel orderToCreate = new OrderModel();
         orderToCreate.setUserId(orderRequest.getUserId());
         orderToCreate.setOrderStatus(orderStatus);
