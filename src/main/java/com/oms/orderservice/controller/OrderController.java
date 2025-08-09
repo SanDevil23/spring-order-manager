@@ -4,12 +4,10 @@ import com.oms.orderservice.dto.OrderDto;
 import com.oms.orderservice.service.IOrderService;
 import com.oms.orderservice.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*") // CORS resolution **not recommended for production
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/orders")
 @RestController
