@@ -35,12 +35,17 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto create(OrderDto orderRequest) {
-        OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getOrderStatus().getId()).orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
-        OrderModel orderToCreate = new OrderModel();
-        orderToCreate.setUserId(orderRequest.getUserId());
-        orderToCreate.setOrderStatus(orderStatus);
-        orderToCreate.setCreatedAt(LocalDateTime.now(ZoneOffset.UTC));
-        orderToCreate.setUpdatedAt(orderToCreate.getCreatedAt());
+        if (isIdNull(orderRequest.getUserId())) throw new IllegalArgumentException("User Id is invalid");
+        if (isIdNull(orderRequest.getOrderStatus().getId())) throw new IllegalArgumentException("Order Status Id is invalid");
+
+        OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getOrderStatus().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
+        OrderModel orderToCreate = OrderModel.builder()
+                .userId(orderRequest.getUserId())
+                .orderStatus(orderStatus)
+                .createdAt(LocalDateTime.now(ZoneOffset.UTC))
+                .updatedAt(LocalDateTime.now(ZoneOffset.UTC))
+                .build();
         OrderModel createdOrder = orderRepository.save(orderToCreate);
         return OrderDto.toDto(createdOrder);
     }
@@ -52,7 +57,10 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto fetchById(Long orderId) {
-        OrderModel fetchedOrder = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
+        if (isIdNull(orderId)) throw new IllegalArgumentException("Order Id is invalid");
+
+        OrderModel fetchedOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
         return OrderDto.toDto(fetchedOrder);
     }
 
@@ -75,13 +83,22 @@ public class OrderServiceImpl implements IOrderService {
      * @return OrderDto
      */
     @Override
-    public OrderDto updateStatus(Long orderId, Long orderStatusId) {
-        OrderStatusModel orderStatus = orderStatusRepository.findById(orderStatusId).orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
-        OrderModel fetchedOrder = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
+    public OrderDto updateOrderStatus(Long orderId, Long orderStatusId) {
+        if (isIdNull(orderId)) throw new IllegalArgumentException("Order Id is invalid");
+        if (isIdNull(orderStatusId)) throw new IllegalArgumentException("Order Status Id is invalid");
+
+        OrderStatusModel orderStatus = orderStatusRepository.findById(orderStatusId)
+                .orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
+        OrderModel fetchedOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
         fetchedOrder.setOrderStatus(orderStatus);
         fetchedOrder.setUpdatedAt(LocalDateTime.now(ZoneOffset.UTC));
         OrderModel updatedOrder = orderRepository.save(fetchedOrder);
         return OrderDto.toDto(updatedOrder);
+    }
+
+    private boolean isIdNull(Long id) {
+        return id == null || id <= 0;
     }
 
 }

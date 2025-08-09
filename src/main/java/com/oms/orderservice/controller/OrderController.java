@@ -22,6 +22,13 @@ public class OrderController {
         );
     }
 
+    @GetMapping("/{orderId}")
+    public ResponseEntity<ApiResponse> fetchOrderById(Long orderId) {
+        return ResponseEntity.ok(
+                ApiResponse.success("Order", orderService.fetchById(orderId))
+        );
+    }
+
     @GetMapping
     public ResponseEntity<ApiResponse> fetchAllOrders() {
         return ResponseEntity.ok(
@@ -32,7 +39,7 @@ public class OrderController {
     @PatchMapping("/{orderId}/orderStatuses/{orderStatusId}")
     public ResponseEntity<ApiResponse> updateOrderStatus(@PathVariable Long orderId, @PathVariable Long orderStatusId) {
         return ResponseEntity.ok(
-                ApiResponse.success("Order updated!", orderService.updateStatus(orderId, orderStatusId))
+                ApiResponse.success("Order updated!", orderService.updateOrderStatus(orderId, orderStatusId))
         );
     }
 

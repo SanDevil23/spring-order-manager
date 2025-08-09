@@ -1,6 +1,7 @@
 package com.oms.orderservice.dto;
 
 import com.oms.orderservice.model.OrderStatusModel;
+import com.oms.orderservice.util.OrderStatusNameEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,14 +16,14 @@ import java.time.LocalDateTime;
 public class OrderStatusDto {
 
     private Long id;
-    private String name;
+    private OrderStatusNameEnum name;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public static OrderStatusDto toDto(OrderStatusModel orderStatusModel) {
         return new OrderStatusDto(
                 orderStatusModel.getId(),
-                orderStatusModel.getName().name(),
+                orderStatusModel.getName(),
                 orderStatusModel.getCreatedAt(),
                 orderStatusModel.getUpdatedAt()
         );
