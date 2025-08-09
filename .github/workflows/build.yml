@@ -31,8 +31,5 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build without tests
-        run: mvn -B clean package -DskipTests
-
-      - name: Run tests
-        run: mvn test -Dspring.profiles.active=test
+      - name: Build and Test
+        run: mvn -B clean verify -Dspring.profiles.active=test
