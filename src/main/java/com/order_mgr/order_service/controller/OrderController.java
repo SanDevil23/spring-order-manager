@@ -20,9 +20,9 @@ public class OrderController {
     public ResponseEntity<ApiResponse> createOrder(@RequestBody Order order){
         try{
             orderInterface.createOrder(order);
-            return ResponseEntity.ok(new ApiResponse("Order Created Successfully", order));
+            return ResponseEntity.ok(ApiResponse.success("Order Created Successfully", order));
         } catch (Exception e){
-            return ResponseEntity.status(500).body(new ApiResponse("Order creation failed", null));
+            return ResponseEntity.status(500).body(ApiResponse.error("Order creation failed"));
         }
     }
 
@@ -30,9 +30,9 @@ public class OrderController {
     public ResponseEntity<ApiResponse> fetchAllOrders(){
         try {
             List<Order> orderList = orderInterface.fetchAllOrders();
-            return ResponseEntity.ok(new ApiResponse("Order List", orderList));
+            return ResponseEntity.ok(ApiResponse.success("Order List", orderList));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(new ApiResponse("Failed to fetch orders", null));
+            return ResponseEntity.status(500).body(ApiResponse.error("Failed to fetch orders"));
         }
     }
 
@@ -43,12 +43,12 @@ public class OrderController {
 
             // check if the status has been updated successfully
             if (updatedOrder.getStatus().toString().equals(status)){
-                return ResponseEntity.ok(new ApiResponse("Updated Order Status", null));
+                return ResponseEntity.ok(ApiResponse.success("Updated Order Status"));
             }
 
             throw new RuntimeException("Failed to update the order status");
         } catch (Exception e) {
-            return ResponseEntity.ok(new ApiResponse("Failed to Update Order Status", null));
+            return ResponseEntity.ok(ApiResponse.error("Failed to Update Order Status"));
         }
     }
 }
