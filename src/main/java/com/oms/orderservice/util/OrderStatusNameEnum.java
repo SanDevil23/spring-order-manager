@@ -1,4 +1,4 @@
-package com.ordermgr.orderservice.util;
+package com.oms.orderservice.util;
 
 public enum OrderStatusNameEnum {
 

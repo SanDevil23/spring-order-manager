@@ -1,4 +1,4 @@
-package com.ordermgr.orderservice.util;
+package com.oms.orderservice.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

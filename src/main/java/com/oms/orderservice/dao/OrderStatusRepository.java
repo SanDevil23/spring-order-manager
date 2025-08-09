@@ -1,6 +1,6 @@
-package com.ordermgr.orderservice.dao;
+package com.oms.orderservice.dao;
 
-import com.ordermgr.orderservice.model.OrderStatusModel;
+import com.oms.orderservice.model.OrderStatusModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

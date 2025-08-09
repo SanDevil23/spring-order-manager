@@ -1,4 +1,4 @@
-package com.ordermgr.orderservice.model;
+package com.oms.orderservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

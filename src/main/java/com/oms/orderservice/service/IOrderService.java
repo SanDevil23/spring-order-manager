@@ -1,6 +1,6 @@
-package com.ordermgr.orderservice.service;
+package com.oms.orderservice.service;
 
-import com.ordermgr.orderservice.dto.OrderDto;
+import com.oms.orderservice.dto.OrderDto;
 
 import java.util.List;
 

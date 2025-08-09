@@ -1,6 +1,6 @@
-package com.ordermgr.orderservice.model;
+package com.oms.orderservice.model;
 
-import com.ordermgr.orderservice.util.OrderStatusNameEnum;
+import com.oms.orderservice.util.OrderStatusNameEnum;
 import jakarta.persistence.*;
 import lombok.*;
 

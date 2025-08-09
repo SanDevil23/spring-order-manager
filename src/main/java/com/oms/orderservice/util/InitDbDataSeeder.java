@@ -1,7 +1,7 @@
-package com.ordermgr.orderservice.util;
+package com.oms.orderservice.util;
 
-import com.ordermgr.orderservice.dao.OrderStatusRepository;
-import com.ordermgr.orderservice.model.OrderStatusModel;
+import com.oms.orderservice.dao.OrderStatusRepository;
+import com.oms.orderservice.model.OrderStatusModel;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

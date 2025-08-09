@@ -1,6 +1,6 @@
-package com.ordermgr.orderservice.dto;
+package com.oms.orderservice.dto;
 
-import com.ordermgr.orderservice.model.OrderStatusModel;
+import com.oms.orderservice.model.OrderStatusModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

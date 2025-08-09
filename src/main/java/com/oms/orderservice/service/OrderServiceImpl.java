@@ -1,10 +1,11 @@
-package com.ordermgr.orderservice.service;
+package com.oms.orderservice.service;
 
-import com.ordermgr.orderservice.dao.OrderStatusRepository;
-import com.ordermgr.orderservice.dto.OrderDto;
-import com.ordermgr.orderservice.model.OrderModel;
-import com.ordermgr.orderservice.dao.OrderRepository;
-import com.ordermgr.orderservice.model.OrderStatusModel;
+import com.oms.orderservice.dao.OrderStatusRepository;
+import com.oms.orderservice.dto.OrderDto;
+import com.oms.orderservice.model.OrderModel;
+import com.oms.orderservice.dao.OrderRepository;
+import com.oms.orderservice.model.OrderStatusModel;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto create(OrderDto orderRequest) {
-        OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getStatus().getId()).orElseThrow(() -> new RuntimeException("Order status Not Found"));
+        OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getStatus().getId()).orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
         OrderModel orderToCreate = new OrderModel();
         orderToCreate.setUserId(orderRequest.getUserId());
         orderToCreate.setOrderStatus(orderStatus);
@@ -51,7 +52,7 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto fetchById(Long orderId) {
-        OrderModel fetchedOrder = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order Not Found"));
+        OrderModel fetchedOrder = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
         return OrderDto.toDto(fetchedOrder);
     }
 
@@ -75,8 +76,8 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto updateStatus(Long orderId, Long orderStatusId) {
-        OrderStatusModel orderStatus = orderStatusRepository.findById(orderStatusId).orElseThrow(() -> new RuntimeException("Order Status Not Found"));
-        OrderModel fetchedOrder = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order Not Found"));
+        OrderStatusModel orderStatus = orderStatusRepository.findById(orderStatusId).orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
+        OrderModel fetchedOrder = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
         fetchedOrder.setOrderStatus(orderStatus);
         fetchedOrder.setUpdatedAt(LocalDateTime.now(ZoneOffset.UTC));
         OrderModel updatedOrder = orderRepository.save(fetchedOrder);
