@@ -15,9 +15,9 @@ jobs:
         image: mysql:8
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: order_db
-          MYSQL_USER: order-service-user
-          MYSQL_PASSWORD: order-service-password
+          MYSQL_DATABASE: test_order_db
+          MYSQL_USER: test-order-service-user
+          MYSQL_PASSWORD: test-order-service-password
         ports:
           - 3306:3306
 
