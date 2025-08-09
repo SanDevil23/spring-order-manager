@@ -8,10 +8,10 @@
 		<version>3.4.8</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.order_mgr</groupId>
-	<artifactId>order_service</artifactId>
+	<groupId>com.oms</groupId>
+	<artifactId>order-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>order_service</name>
+	<name>order-service</name>
 	<description>Demo project for Spring Boot and ReactJS</description>
 	<url/>
 	<licenses>
