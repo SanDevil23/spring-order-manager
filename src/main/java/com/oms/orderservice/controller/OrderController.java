@@ -18,21 +18,21 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<ApiResponse> createOrder(@RequestBody OrderDto orderRequest) {
         return ResponseEntity.ok(
-                ApiResponse.success("Order Created Successfully", orderService.create(orderRequest))
+                ApiResponse.success("Order created!", orderService.create(orderRequest))
         );
     }
 
     @GetMapping
     public ResponseEntity<ApiResponse> fetchAllOrders() {
         return ResponseEntity.ok(
-                ApiResponse.success("Order List", orderService.fetchAll())
+                ApiResponse.success("Order list", orderService.fetchAll())
         );
     }
 
     @PatchMapping("/{orderId}/orderStatuses/{orderStatusId}")
     public ResponseEntity<ApiResponse> updateOrderStatus(@PathVariable Long orderId, @PathVariable Long orderStatusId) {
         return ResponseEntity.ok(
-                ApiResponse.success("Order updated", orderService.updateStatus(orderId, orderStatusId))
+                ApiResponse.success("Order updated!", orderService.updateStatus(orderId, orderStatusId))
         );
     }
 
