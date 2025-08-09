@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: order-service
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  port: 8082
+api:
+  prefix: /api/v1
