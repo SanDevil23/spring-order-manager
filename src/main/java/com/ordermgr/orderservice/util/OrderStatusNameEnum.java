@@ -1,9 +1,11 @@
-package com.order_mgr.order_service.utils;
+package com.ordermgr.orderservice.util;
 
-public enum OrderStatus {
+public enum OrderStatusNameEnum {
+
     WAITING_FOR_CONFIRMATION,
     IN_PROCESS,
     ORDER_READY_TO_DELIVER,
     OUT_FOR_DELIVERY,
     DELIVERED
+
 }

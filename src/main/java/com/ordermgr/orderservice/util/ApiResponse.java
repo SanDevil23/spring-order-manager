@@ -1,4 +1,4 @@
-package com.order_mgr.order_service.utils;
+package com.ordermgr.orderservice.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -11,7 +11,32 @@ public class ApiResponse {
     private String message;
     private Object data;
 
-    private ApiResponse() {}
+    private ApiResponse() {
+    }
+
+    public static ApiResponse success(int status, String message, Object data) {
+        return new ApiResponse()
+                .setStatus(status)
+                .setMessage(message)
+                .setData(data);
+    }
+
+    public static ApiResponse success(String message, Object data) {
+        return new ApiResponse()
+                .setMessage(message)
+                .setData(data);
+    }
+
+    public static ApiResponse error(int status, String message) {
+        return new ApiResponse()
+                .setStatus(status)
+                .setMessage(message);
+    }
+
+    public static ApiResponse error(String message) {
+        return new ApiResponse()
+                .setMessage(message);
+    }
 
     private ApiResponse setStatus(int status) {
         this.status = status;
@@ -26,35 +51,6 @@ public class ApiResponse {
     private ApiResponse setData(Object data) {
         this.data = data;
         return this;
-    }
-
-    public static ApiResponse success(int status, String message, Object data) {
-       return new ApiResponse()
-               .setStatus(status)
-               .setMessage(message)
-               .setData(data);
-    }
-
-    public static ApiResponse success(String message, Object data) {
-        return new ApiResponse()
-                .setMessage(message)
-                .setData(data);
-    }
-
-    public static ApiResponse success(String message) {
-        return new ApiResponse()
-                .setMessage(message);
-    }
-
-    public static ApiResponse error(int status, String message) {
-        return new ApiResponse()
-                .setStatus(status)
-                .setMessage(message);
-    }
-
-    public static ApiResponse error(String message) {
-        return new ApiResponse()
-                .setMessage(message);
     }
 
 }

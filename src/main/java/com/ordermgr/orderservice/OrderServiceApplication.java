@@ -1,4 +1,4 @@
-package com.order_mgr.order_service;
+package com.ordermgr.orderservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
