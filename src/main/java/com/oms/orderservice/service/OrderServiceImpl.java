@@ -35,8 +35,8 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto create(OrderDto orderRequest) {
-        if (isIdNull(orderRequest.getUserId())) throw new IllegalArgumentException("User Id is invalid");
-        if (isIdNull(orderRequest.getOrderStatus().getId())) throw new IllegalArgumentException("Order Status Id is invalid");
+        if (isIdInvalid(orderRequest.getUserId())) throw new IllegalArgumentException("User Id is invalid");
+        if (isIdInvalid(orderRequest.getOrderStatus().getId())) throw new IllegalArgumentException("Order Status Id is invalid");
 
         OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getOrderStatus().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
@@ -57,7 +57,7 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto fetchById(Long orderId) {
-        if (isIdNull(orderId)) throw new IllegalArgumentException("Order Id is invalid");
+        if (isIdInvalid(orderId)) throw new IllegalArgumentException("Order Id is invalid");
 
         OrderModel fetchedOrder = orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
@@ -84,8 +84,8 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public OrderDto updateOrderStatus(Long orderId, Long orderStatusId) {
-        if (isIdNull(orderId)) throw new IllegalArgumentException("Order Id is invalid");
-        if (isIdNull(orderStatusId)) throw new IllegalArgumentException("Order Status Id is invalid");
+        if (isIdInvalid(orderId)) throw new IllegalArgumentException("Order Id is invalid");
+        if (isIdInvalid(orderStatusId)) throw new IllegalArgumentException("Order Status Id is invalid");
 
         OrderStatusModel orderStatus = orderStatusRepository.findById(orderStatusId)
                 .orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
@@ -97,7 +97,7 @@ public class OrderServiceImpl implements IOrderService {
         return OrderDto.toDto(updatedOrder);
     }
 
-    private boolean isIdNull(Long id) {
+    private boolean isIdInvalid(Long id) {
         return id == null || id <= 0;
     }
 
