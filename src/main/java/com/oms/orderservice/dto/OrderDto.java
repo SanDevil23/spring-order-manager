@@ -16,7 +16,7 @@ public class OrderDto {
 
     private Long id;
     private Long userId;
-    private OrderStatusDto status;
+    private OrderStatusDto orderStatus;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

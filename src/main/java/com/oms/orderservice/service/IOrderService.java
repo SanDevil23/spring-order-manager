@@ -9,6 +9,6 @@ public interface IOrderService {
     OrderDto create(OrderDto orderRequest);
     OrderDto fetchById(Long orderId);
     List<OrderDto> fetchAll();
-    OrderDto updateStatus(Long orderId, Long statusId);
+    OrderDto updateStatus(Long orderId, Long orderStatusId);
 
 }

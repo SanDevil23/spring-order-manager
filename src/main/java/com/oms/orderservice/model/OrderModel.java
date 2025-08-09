@@ -29,11 +29,12 @@ public class OrderModel {
     @Id
     private Long orderId;
 
+    private Long userId;
+
     @ManyToOne
     @JoinColumn(name = "order_status_id", referencedColumnName = "id")
     private OrderStatusModel orderStatus;
 
-    private Long userId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
