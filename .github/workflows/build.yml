@@ -15,9 +15,9 @@ jobs:
         image: mysql:8
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test_order_db
-          MYSQL_USER: test-order-service-user
-          MYSQL_PASSWORD: test-order-service-password
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: test-service-user
+          MYSQL_PASSWORD: test-service-password
         ports:
           - 3306:3306
 
@@ -34,5 +34,5 @@ jobs:
       - name: Build without tests
         run: mvn -B clean package -DskipTests
 
-      - name: Run Tests
+      - name: Run tests
         run: mvn test -Dspring.profiles.active=test
