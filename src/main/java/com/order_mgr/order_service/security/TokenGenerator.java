@@ -1,5 +1,6 @@
 package com.order_mgr.order_service.security;
 
+import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import org.springframework.security.oauth2.jwt.*;
@@ -24,7 +25,7 @@ public class TokenGenerator {
                 .keyID("123")
                 .build();
 
-        NimbusJwtEncoder encoder = new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet(rsaKey)));
+        NimbusJwtEncoder encoder = new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet((JWK) rsaKey)));
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("https://example.com")
