@@ -2,6 +2,8 @@ package com.oms.orderservice.dto;
 
 import com.oms.orderservice.model.OrderStatusModel;
 import com.oms.orderservice.util.OrderStatusNameEnum;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class OrderStatusDto {
 
+    @Positive
+    @NotNull
     private Long id;
     private OrderStatusNameEnum name;
     private LocalDateTime createdAt;

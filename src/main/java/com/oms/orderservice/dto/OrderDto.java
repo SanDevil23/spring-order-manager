@@ -1,6 +1,9 @@
 package com.oms.orderservice.dto;
 
 import com.oms.orderservice.model.OrderModel;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +18,15 @@ import java.time.LocalDateTime;
 public class OrderDto {
 
     private Long id;
+
+    @Positive
+    @NotNull
     private Long userId;
+
+    @NotNull
+    @Valid
     private OrderStatusDto orderStatus;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

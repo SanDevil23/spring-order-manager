@@ -2,11 +2,13 @@ package com.oms.orderservice.service;
 
 import com.oms.orderservice.dao.OrderStatusRepository;
 import com.oms.orderservice.dto.OrderDto;
+import com.oms.orderservice.exception.BusinessException;
 import com.oms.orderservice.model.OrderModel;
 import com.oms.orderservice.dao.OrderRepository;
 import com.oms.orderservice.model.OrderStatusModel;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,12 +36,9 @@ public class OrderServiceImpl implements IOrderService {
      * @param orderRequest
      */
     @Override
-    public OrderDto create(OrderDto orderRequest) {
-        if (isIdInvalid(orderRequest.getUserId())) throw new IllegalArgumentException("User Id is invalid");
-        if (isIdInvalid(orderRequest.getOrderStatus().getId())) throw new IllegalArgumentException("Order Status Id is invalid");
-
+    public OrderDto create(OrderDto orderRequest) throws BusinessException {
         OrderStatusModel orderStatus = orderStatusRepository.findById(orderRequest.getOrderStatus().getId())
-                .orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
+                .orElseThrow(() -> new BusinessException("Order Status Not Found", HttpStatus.NOT_FOUND));
         OrderModel orderToCreate = OrderModel.builder()
                 .userId(orderRequest.getUserId())
                 .orderStatus(orderStatus)
@@ -56,11 +55,9 @@ public class OrderServiceImpl implements IOrderService {
      * @return OrderDto
      */
     @Override
-    public OrderDto fetchById(Long orderId) {
-        if (isIdInvalid(orderId)) throw new IllegalArgumentException("Order Id is invalid");
-
+    public OrderDto fetchById(Long orderId) throws BusinessException {
         OrderModel fetchedOrder = orderRepository.findById(orderId)
-                .orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
+                .orElseThrow(() -> new BusinessException("Order Not Found", HttpStatus.NOT_FOUND));
         return OrderDto.toDto(fetchedOrder);
     }
 
@@ -83,22 +80,15 @@ public class OrderServiceImpl implements IOrderService {
      * @return OrderDto
      */
     @Override
-    public OrderDto updateOrderStatus(Long orderId, Long orderStatusId) {
-        if (isIdInvalid(orderId)) throw new IllegalArgumentException("Order Id is invalid");
-        if (isIdInvalid(orderStatusId)) throw new IllegalArgumentException("Order Status Id is invalid");
-
+    public OrderDto updateOrderStatus(Long orderId, Long orderStatusId) throws BusinessException {
         OrderStatusModel orderStatus = orderStatusRepository.findById(orderStatusId)
-                .orElseThrow(() -> new EntityNotFoundException("Order Status Not Found"));
+                .orElseThrow(() -> new BusinessException("Order Status Not Found", HttpStatus.NOT_FOUND));
         OrderModel fetchedOrder = orderRepository.findById(orderId)
-                .orElseThrow(() -> new EntityNotFoundException("Order Not Found"));
+                .orElseThrow(() -> new BusinessException("Order Not Found", HttpStatus.NOT_FOUND));
         fetchedOrder.setOrderStatus(orderStatus);
         fetchedOrder.setUpdatedAt(LocalDateTime.now(ZoneOffset.UTC));
         OrderModel updatedOrder = orderRepository.save(fetchedOrder);
         return OrderDto.toDto(updatedOrder);
-    }
-
-    private boolean isIdInvalid(Long id) {
-        return id == null || id <= 0;
     }
 
 }
