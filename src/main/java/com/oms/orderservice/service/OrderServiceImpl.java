@@ -1,12 +1,11 @@
 package com.oms.orderservice.service;
 
+import com.oms.orderservice.dao.OrderRepository;
 import com.oms.orderservice.dao.OrderStatusRepository;
 import com.oms.orderservice.dto.OrderDto;
 import com.oms.orderservice.exception.BusinessException;
 import com.oms.orderservice.model.OrderModel;
-import com.oms.orderservice.dao.OrderRepository;
 import com.oms.orderservice.model.OrderStatusModel;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Holds business logic for order related operations
@@ -70,7 +68,7 @@ public class OrderServiceImpl implements IOrderService {
         return orderRepository.findAll()
                 .stream()
                 .map(OrderDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
