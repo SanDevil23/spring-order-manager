@@ -35,7 +35,7 @@ public class GenericExceptionHandler {
                 .body(ApiResponse.error("Invalid request body structure"));
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
+    @ExceptionHandler(value = ConstraintViolationException.class)
     public ResponseEntity<ApiResponse> handleConstraintViolationException(ConstraintViolationException e) {
         LOGGER.error(e.getMessage());
         String errors = e.getConstraintViolations().stream()
@@ -46,7 +46,7 @@ public class GenericExceptionHandler {
                 .body(ApiResponse.error(String.format("Invalid request path/query parameters: %s", errors)));
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         LOGGER.error(e.getMessage());
         String errors = e.getBindingResult().getFieldErrors().stream()
@@ -57,7 +57,7 @@ public class GenericExceptionHandler {
                 .body(ApiResponse.error(String.format("Invalid request body parameters: %s", errors)));
     }
 
-    @ExceptionHandler(BusinessException.class)
+    @ExceptionHandler(value = BusinessException.class)
     public ResponseEntity<ApiResponse> handleBusinessException(BusinessException e) {
         return ResponseEntity
                 .status(e.getStatus())
