@@ -1,4 +1,4 @@
-package com.order_mgr.order_service.security;
+package com.oms.orderservice.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
