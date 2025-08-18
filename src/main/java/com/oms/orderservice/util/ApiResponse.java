@@ -1,0 +1,37 @@
+package com.oms.orderservice.util;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter
+public class ApiResponse {
+
+    private String message;
+    private Object data;
+
+    private ApiResponse() {
+    }
+
+    public static ApiResponse success(String message, Object data) {
+        return new ApiResponse()
+                .setMessage(message)
+                .setData(data);
+    }
+
+    public static ApiResponse error(String message) {
+        return new ApiResponse()
+                .setMessage(message);
+    }
+
+    private ApiResponse setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    private ApiResponse setData(Object data) {
+        this.data = data;
+        return this;
+    }
+
+}
