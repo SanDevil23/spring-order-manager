@@ -15,9 +15,14 @@ public class HomeController {
         return "<a href='/login'>Login with GitHub</a>";
     }
 
-    @GetMapping("/profile")
-    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
-        return principal.getAttributes(); // returns GitHub user info
+    @GetMapping("/home")
+    public String home1() {
+        return "Welcome to OMS";
     }
+
+//    @GetMapping("/profile")
+//    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
+//        return principal.getAttributes(); // returns GitHub user info
+//    }
 }
 

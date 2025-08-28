@@ -4,8 +4,8 @@ spring:
       client:
         registration:
           github:
-            client-id: YOUR_CLIENT_ID
-            client-secret: YOUR_CLIENT_SECRET
+            client-id: Ov23liLIkyk1RK0wxR8y
+            client-secret: a30cd9b6aed775a1d76fc29ce2fdf9556cc67fa3
             scope: read:user, user:email
             redirect-uri: "{baseUrl}/login/oauth2/oms/{registrationId}"
             client-name: GitHub
@@ -14,3 +14,6 @@ spring:
             authorization-uri: https://github.com/login/oauth/authorize
             token-uri: https://github.com/login/oauth/access_token
             user-info-uri: https://api.github.com/user
+
+#    # fix redirect after login
+#    default-success-url: /home  # or any public, non-secured page

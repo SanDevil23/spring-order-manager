@@ -18,10 +18,12 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login**", "/error").permitAll()
+                        .requestMatchers("/", "/login**", "/error", "/home", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
-                )
-                .oauth2Login(Customizer.withDefaults()); // Enables GitHub login
+                );
+//                // Enables GitHub login
+//                .oauth2Login(oauth2 -> oauth2
+//                        .defaultSuccessUrl("/home", true));        // redirects here after login
 
         return http.build();
     }
