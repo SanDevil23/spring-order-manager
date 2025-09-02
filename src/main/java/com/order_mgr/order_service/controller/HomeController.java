@@ -10,7 +10,7 @@ import java.util.Map;
 @RestController
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/login")
     public String home() {
         return "<a href='/login'>Login with GitHub</a>";
     }
@@ -20,9 +20,9 @@ public class HomeController {
         return "Welcome to OMS";
     }
 
-//    @GetMapping("/profile")
-//    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
-//        return principal.getAttributes(); // returns GitHub user info
-//    }
+    @GetMapping("/profile")
+    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
+        return principal.getAttributes(); // returns GitHub user info
+    }
 }
 
