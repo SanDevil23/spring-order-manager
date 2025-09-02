@@ -2,6 +2,9 @@ package com.order_mgr.order_service.controller;
 
 import com.order_mgr.order_service.logic.IOrderService;
 import com.order_mgr.order_service.model.Order;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("${api.prefix}/orders")
+@Tag(name = "Order Manager", description = "Operations for managing orders")
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
     private final IOrderService orderInterface;
@@ -30,15 +34,15 @@ public class OrderController {
         }
     }
 
-//    @GetMapping("/all")
-//    public ResponseEntity<List<Order>> fetchAllOrders() {
-//        try {
-//            List<Order> orderList = orderInterface.fetchAllOrders();
-//            return ResponseEntity.ok(orderList);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(500).build();
-//        }
-//    }
+    @GetMapping("/all")
+    public ResponseEntity<List<Order>> fetchAllOrders() {
+        try {
+            List<Order> orderList = orderInterface.fetchAllOrders();
+            return ResponseEntity.ok(orderList);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
 
     @PatchMapping("/admin/update")
     public ResponseEntity<String> updateOrderStatus(@RequestParam int orderId, @RequestParam String status){
