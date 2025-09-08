@@ -11,8 +11,20 @@ import java.util.Map;
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
+    public String startup() {
         return "<a href='/login'>Login with GitHub</a>";
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return """
+            <html>
+                <body>
+                    <h1>Welcome! You are logged in.</h1>
+                    <a href="/logout">Logout</a>
+                </body>
+            </html>
+        """;
     }
 
     @GetMapping("/profile")

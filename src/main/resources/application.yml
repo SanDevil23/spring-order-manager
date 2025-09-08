@@ -1,3 +1,12 @@
+server:
+  port: 8080
+  forward-headers-strategy: framework  # If behind proxy
+  servlet:
+    session:
+      cookie:
+        same-site: lax     # Avoid SameSite issues
+        secure: false      # Only true if using HTTPS
+
 spring:
   security:
     oauth2:
@@ -7,7 +16,7 @@ spring:
             client-id: YOUR_CLIENT_ID
             client-secret: YOUR_CLIENT_SECRET
             scope: read:user, user:email
-            redirect-uri: "{baseUrl}/login/oauth2/oms/{registrationId}"
+            redirect-uri: "{baseUrl}/login/oauth2/code/github"
             client-name: GitHub
         provider:
           github:
