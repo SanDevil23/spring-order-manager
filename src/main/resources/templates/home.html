@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome to the App!</h1>
+
+<div th:if="${name}">
+    <img th:src="${avatar_url}" alt="Avatar" width="80" style="border-radius:50%">
+    <p>Hello, <b th:text="${name}"></b> (@<span th:text="${login}"></span>)</p>
+    <a href="/profile">Go to Profile</a> |
+    <a href="/logout">Logout</a>
+</div>
+
+<div th:if="${name == null}">
+    <p>You are not logged in.</p>
+    <a href="/oauth2/authorization/github">Login with GitHub</a>
+</div>
+</body>
+</html>

@@ -8,13 +8,17 @@ server:
         secure: false      # Only true if using HTTPS
 
 spring:
+  thymeleaf:
+    cache: false        # Disable caching for development
+    prefix: classpath:/templates/
+    suffix: .html
   security:
     oauth2:
       client:
         registration:
           github:
-            client-id: YOUR_CLIENT_ID
-            client-secret: YOUR_CLIENT_SECRET
+            client-id: Ov23liLIkyk1RK0wxR8y
+            client-secret: a30cd9b6aed775a1d76fc29ce2fdf9556cc67fa3
             scope: read:user, user:email
             redirect-uri: "{baseUrl}/login/oauth2/code/github"
             client-name: GitHub

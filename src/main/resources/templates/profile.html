@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<h1>Profile Page</h1>
+<div th:if="${user}">
+    <img th:src="${user.attributes['avatar_url']}" width="100" style="border-radius:50%">
+    <p><b>Name:</b> <span th:text="${user.attributes['name']}"></span></p>
+    <p><b>Username:</b> <span th:text="${user.attributes['login']}"></span></p>
+    <p><b>Email:</b> <span th:text="${user.attributes['email']}"></span></p>
+    <a href="/">Home</a> |
+    <a href="/logout">Logout</a>
+</div>
+</body>
+</html>
