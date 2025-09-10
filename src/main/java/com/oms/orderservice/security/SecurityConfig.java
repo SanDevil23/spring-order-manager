@@ -1,5 +1,4 @@
-package com.order_mgr.order_service.security;
-
+package com.oms.orderservice.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +14,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login**", "/error").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .oauth2Login(Customizer.withDefaults()); // Enables GitHub login
-
+        http.csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/", "/login**", "/error").permitAll()
+                    .anyRequest().authenticated()
+            )
+            .oauth2Login(Customizer.withDefaults()); // Enables GitHub login
         return http.build();
     }
+    
 }
