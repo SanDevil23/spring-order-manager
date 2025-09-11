@@ -1,5 +1,4 @@
-package com.order_mgr.order_service.security;
-
+package com.oms.orderservice.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +17,19 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login**", "/error", "/home", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/", "/login", "/error", "/oauth2/**").permitAll()
                         .anyRequest().authenticated()
+                )
+                .oauth2Login(oauth->oauth
+                        .defaultSuccessUrl("/home", true))   // Enables GitHub login
+                .logout(logout -> logout
+                        .logoutUrl("/logout")                 // Default is /logout
+                        .logoutSuccessUrl("/login")               // Redirect here after logout
+                        .invalidateHttpSession(true)         // Invalidate session
+                        .clearAuthentication(true)           // Clear authentication
+                        .deleteCookies("OAUTHSESSIONID")         // Delete session cookies
+                        .permitAll()
                 );
-//                // Enables GitHub login
-//                .oauth2Login(oauth2 -> oauth2
-//                        .defaultSuccessUrl("/home", true));        // redirects here after login
-
         return http.build();
     }
 }
