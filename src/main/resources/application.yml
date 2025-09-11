@@ -1,4 +1,17 @@
+server:
+  port: 8080
+  forward-headers-strategy: framework  # If behind proxy
+  servlet:
+    session:
+      cookie:
+        same-site: lax     # Avoid SameSite issues
+        secure: false      # Only true if using HTTPS
+
 spring:
+  thymeleaf:
+    cache: false        # Disable caching for development
+    prefix: classpath:/templates/
+    suffix: .html
   application:
     name: order-service
   profiles:
@@ -17,14 +30,12 @@ spring:
             client-id: YOUR_CLIENT_ID
             client-secret: YOUR_CLIENT_SECRET
             scope: read:user, user:email
-            redirect-uri: "{baseUrl}/login/oauth2/oms/{registrationId}"
+            redirect-uri: "{baseUrl}/login/oauth2/code/github"
             client-name: GitHub
         provider:
           github:
             authorization-uri: https://github.com/login/oauth/authorize
             token-uri: https://github.com/login/oauth/access_token
             user-info-uri: https://api.github.com/user
-server:
-  port: 8080
 api:
   prefix: /oms/v1

@@ -2,22 +2,40 @@ package com.oms.orderservice.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
-@RestController
+@Controller
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
-        return "<a href='/login'>Login with GitHub</a>";
+    public String startup() {
+        return "startup";
+    }
+
+    @GetMapping("/home")
+    public String home(Model model, @AuthenticationPrincipal OAuth2User principal) {
+        if (principal != null) {
+            model.addAttribute("name", principal.getAttribute("name"));
+            model.addAttribute("login", principal.getAttribute("login"));
+            model.addAttribute("avatar_url", principal.getAttribute("avatar_url"));
+        }
+        return "home"; // Renders home.html
     }
 
     @GetMapping("/profile")
-    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
-        return principal.getAttributes(); // returns GitHub user info
+    public String profile(Model model, @AuthenticationPrincipal OAuth2User principal) {
+        model.addAttribute("user", principal);
+        return "profile"; // Renders profile.html
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Renders login.html
+    }
 }
+
+

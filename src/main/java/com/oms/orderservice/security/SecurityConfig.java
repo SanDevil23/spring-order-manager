@@ -14,13 +14,22 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/", "/login**", "/error").permitAll()
-                    .anyRequest().authenticated()
-            )
-            .oauth2Login(Customizer.withDefaults()); // Enables GitHub login
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/login", "/error", "/oauth2/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .oauth2Login(oauth->oauth
+                        .defaultSuccessUrl("/home", true))   // Enables GitHub login
+                .logout(logout -> logout
+                        .logoutUrl("/logout")                 // Default is /logout
+                        .logoutSuccessUrl("/login")               // Redirect here after logout
+                        .invalidateHttpSession(true)         // Invalidate session
+                        .clearAuthentication(true)           // Clear authentication
+                        .deleteCookies("OAUTHSESSIONID")         // Delete session cookies
+                        .permitAll()
+                );
         return http.build();
     }
-    
 }
