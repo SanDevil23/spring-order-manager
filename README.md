@@ -1,8 +1,5 @@
 # Order Management Software
-## Order Manager
-
-
-
+## Order Service
 
 # 🔐 Setting Up Global Constants (e.g., `CLIENT_ID` and `CLIENT_SECRET`)
 
@@ -25,4 +22,3 @@ This guide explains how to store sensitive values such as `CLIENT_ID` and `CLIEN
 ```cmd
 setx CLIENT_ID "your-client-id"
 setx CLIENT_SECRET "your-client-secret"
-
