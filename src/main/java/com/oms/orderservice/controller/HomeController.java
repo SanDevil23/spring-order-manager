@@ -13,7 +13,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String startup() {
-        return "<a href='/login'>Login with GitHub</a>";
+        return "startup";
     }
 
     @GetMapping("/home")

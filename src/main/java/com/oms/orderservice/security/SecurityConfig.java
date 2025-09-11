@@ -24,7 +24,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/home", true))   // Enables GitHub login
                 .logout(logout -> logout
                         .logoutUrl("/logout")                 // Default is /logout
-                        .logoutSuccessUrl("/")               // Redirect here after logout
+                        .logoutSuccessUrl("/login")               // Redirect here after logout
                         .invalidateHttpSession(true)         // Invalidate session
                         .clearAuthentication(true)           // Clear authentication
                         .deleteCookies("OAUTHSESSIONID")         // Delete session cookies
