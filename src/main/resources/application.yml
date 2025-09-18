@@ -39,3 +39,8 @@ spring:
             user-info-uri: https://api.github.com/user
 api:
   prefix: /oms/v1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka/   # 👈 hostname matches docker-compose service name
