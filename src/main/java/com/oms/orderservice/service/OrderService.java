@@ -18,13 +18,13 @@ import java.util.List;
  * Holds business logic for order related operations
  */
 @Service
-public class OrderServiceImpl implements IOrderService {
+public class OrderService implements IOrderService {
 
     private final OrderRepository orderRepository;
     private final OrderStatusRepository orderStatusRepository;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository) {
+    public OrderService(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository) {
         this.orderRepository = orderRepository;
         this.orderStatusRepository = orderStatusRepository;
     }
