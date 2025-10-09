@@ -25,7 +25,7 @@ public class OrderStatusDto {
     public static OrderStatusDto toDto(OrderStatusModel orderStatusModel) {
         return new OrderStatusDto(
                 orderStatusModel.getId(),
-                orderStatusModel.getName(),
+                orderStatusModel.getName()
         );
     }
 
