@@ -21,15 +21,11 @@ public class OrderStatusDto {
     @NotNull
     private Long id;
     private OrderStatusNameEnum name;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     public static OrderStatusDto toDto(OrderStatusModel orderStatusModel) {
         return new OrderStatusDto(
                 orderStatusModel.getId(),
                 orderStatusModel.getName(),
-                orderStatusModel.getCreatedAt(),
-                orderStatusModel.getUpdatedAt()
         );
     }
 

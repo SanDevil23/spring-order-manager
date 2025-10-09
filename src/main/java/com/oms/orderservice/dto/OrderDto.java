@@ -27,16 +27,12 @@ public class OrderDto {
     @Valid
     private OrderStatusDto orderStatus;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     public static OrderDto toDto(OrderModel orderModel) {
         return new OrderDto(
                 orderModel.getOrderId(),
                 orderModel.getUserId(),
                 OrderStatusDto.toDto(orderModel.getOrderStatus()),
-                orderModel.getCreatedAt(),
-                orderModel.getUpdatedAt()
         );
     }
 
