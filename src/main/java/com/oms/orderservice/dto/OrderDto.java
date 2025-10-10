@@ -8,9 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,16 +24,11 @@ public class OrderDto {
     @Valid
     private OrderStatusDto orderStatus;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
     public static OrderDto toDto(OrderModel orderModel) {
         return new OrderDto(
                 orderModel.getOrderId(),
                 orderModel.getUserId(),
-                OrderStatusDto.toDto(orderModel.getOrderStatus()),
-                orderModel.getCreatedAt(),
-                orderModel.getUpdatedAt()
+                OrderStatusDto.toDto(orderModel.getOrderStatus())
         );
     }
 
