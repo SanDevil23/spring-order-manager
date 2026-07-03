@@ -1,5 +1,6 @@
+# order-service → 8081 | inventory-service → 8082 | user-service → 8083
 server:
-  port: 8080
+  port: 8081
   forward-headers-strategy: framework  # If behind proxy
   servlet:
     session:
@@ -17,8 +18,13 @@ spring:
   profiles:
     active: dev
   datasource:
+    url: jdbc:mysql://mysql:3306/orders?createDatabaseIfNotExist=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
@@ -43,4 +49,19 @@ api:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka:8761/eureka/   # 👈 hostname matches docker-compose service name
+      defaultZone: http://discovery-service:8761/eureka/   # hostname matches docker-compose service name
+  instance:
+    prefer-ip-address: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
